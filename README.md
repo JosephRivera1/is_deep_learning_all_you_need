@@ -1,2 +1,3 @@
-# is_deep_learning_all_you_need
-project for machine learning at UCF
+# Is Deep Learning All You Need for Tabular Data?
+
+Inspired by a paper from Intel researchers (), this project is a recreation for a machine learning graduate course at UCF.
