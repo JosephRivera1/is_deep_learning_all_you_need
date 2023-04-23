@@ -1,0 +1,7 @@
+**/cap5610_project
+datasets/
+kaggle/
+**/models
+**/__pycache__
+*.ipynb
+*.pyc
