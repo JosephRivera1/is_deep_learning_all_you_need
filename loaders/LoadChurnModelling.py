@@ -7,13 +7,16 @@ from sklearn.preprocessing import LabelEncoder
 
 def load_churn_modelling_dataset(main_data_dir):
     dataset_path = os.path.join(main_data_dir, 'churn-modelling')
-    Churn_Modelling_df=pd.read_csv(os.path.join(dataset_path, 'churn-modelling.csv'))
+    Churn_Modelling_df=pd.read_csv(os.path.join(dataset_path, 'Churn_Modelling.csv'))
 
     label_encoder = LabelEncoder()
     Churn_Modelling_df['Surname'] = label_encoder.fit_transform(Churn_Modelling_df['Surname'])
 
     label_encoder = LabelEncoder()
     Churn_Modelling_df['Geography'] = label_encoder.fit_transform(Churn_Modelling_df['Geography'])
+
+    label_encoder = LabelEncoder()
+    Churn_Modelling_df['Gender'] = label_encoder.fit_transform(Churn_Modelling_df['Gender'])
 
     X=Churn_Modelling_df.drop(columns=['RowNumber', 'CustomerId', 'Exited'])
     Y=Churn_Modelling_df[['Exited']]

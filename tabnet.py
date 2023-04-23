@@ -4,10 +4,12 @@ from pytorch_tabnet.multitask import TabNetMultiTaskClassifier
  
 import torch
 import os
+import numpy as np
 
 class TabNetRegCustom:
-    def __init__(self, model_name):
+    def __init__(self, model_name, max_epochs=100):
         self.model_name = model_name
+        self.max_epochs = max_epochs
 
     def save_model(self, model):
         if 'models' not in os.listdir('.'):
@@ -50,7 +52,7 @@ class TabNetRegCustom:
         if not model:
             return None
         
-        return model.predict(X_test)
+        return np.array(model.predict(X_test))
 
     def train(self, X_train, Y_train, X_val, Y_val):
         tb_reg = TabNetRegressor(
@@ -67,13 +69,12 @@ class TabNetRegCustom:
             scheduler_fn=torch.optim.lr_scheduler.ReduceLROnPlateau,
             verbose=10,
         )
-        
         tb_reg.fit(X_train,Y_train,
             eval_set=[(X_train, Y_train), (X_val, Y_val)],
             eval_name=['train', 'valid'],
             eval_metric=['rmse'],
-            max_epochs=100,
-            patience=10, batch_size=1024, virtual_batch_size=128,
+            max_epochs=self.max_epochs,
+            patience=int(self.max_epochs/10), batch_size=1024, virtual_batch_size=128,
             drop_last=False
         )
 
@@ -83,9 +84,9 @@ class TabNetRegCustom:
     
 
 class TabNetCfCustom:
-    def __init__(self, model_name):
-        print('model initialized with name:', model_name)
+    def __init__(self, model_name, max_epochs = 100):
         self.model_name = model_name
+        self.max_epochs = max_epochs
 
     def save_model(self, model):
         if 'models' not in os.listdir('.'):
@@ -125,7 +126,14 @@ class TabNetCfCustom:
         if not model:
             return None
         
-        return model.predict(X_test)
+        return np.array(model.predict(X_test))
+    
+    def predict_proba(self, X_test):
+        model = self.load_model()
+        if not model:
+            return None
+        
+        return np.array(model.predict_proba(X_test))
 
     def train(self, X_train, Y_train, X_val, Y_val):
         
@@ -145,8 +153,8 @@ class TabNetCfCustom:
             eval_set=[(X_train, Y_train), (X_val, Y_val)],
             eval_name=['train', 'valid'],
             eval_metric=['logloss', 'accuracy'],
-            max_epochs=100,
-            patience=10, batch_size=1024, virtual_batch_size=128,
+            max_epochs=self.max_epochs,
+            patience=int(self.max_epochs/10), batch_size=1024, virtual_batch_size=128,
             drop_last=False
         )
 
@@ -155,8 +163,9 @@ class TabNetCfCustom:
         return tb_clf.best_cost
     
 class TabNetMultiCfCustom:
-    def __init__(self, model_name):
+    def __init__(self, model_name, max_epochs=100):
         self.model_name = model_name
+        self.max_epochs = max_epochs
 
     def save_model(self, model):
         if 'models' not in os.listdir('.'):
@@ -196,8 +205,15 @@ class TabNetMultiCfCustom:
         if not model:
             return None
         
-        return model.predict(X_test)
-
+        return np.array(model.predict(X_test))
+    
+    def predict_proba(self, X_test):
+        model = self.load_model()
+        if not model:
+            return None
+        
+        return np.array(model.predict_proba(X_test))
+    
     def train(self, X_train, Y_train, X_val, Y_val):
         
         tb_clf = TabNetMultiTaskClassifier(
@@ -216,8 +232,8 @@ class TabNetMultiCfCustom:
             eval_set=[(X_train, Y_train), (X_val, Y_val)],
             eval_name=['train', 'valid'],
             eval_metric=['logloss', 'accuracy'],
-            max_epochs=100,
-            patience=10, batch_size=1024, virtual_batch_size=128,
+            max_epochs=self.max_epochs,
+            patience=int(self.max_epochs/10), batch_size=1024, virtual_batch_size=128,
             drop_last=False
         )
 
