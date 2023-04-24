@@ -26,8 +26,8 @@ Datasets Available via OpenML:
     |---- |---- competitive-data-science-predict-future-sales/
 
 ### Using pyenv and virtualenv (recommended way):
-1. Install pyenv. On linux debian based systems, install pyenv by following this guide (just install pyenv, don't install specific version of python yet): https://itslinuxfoss.com/install-use-pyenv-ubuntu/\
-   For Mac, follow this guide just install pyenv, don't install specific version of python yet): https://londonappdeveloper.com/installing-python-on-macos-using-pyenv/
+1. Install pyenv. On linux debian based systems, install pyenv by following this guide (just install pyenv, don't install specific version of python yet): https://itslinuxfoss.com/install-use-pyenv-ubuntu/ \ 
+   For Mac, follow this guide just install pyenv, don't install specific version of python yet): https://londonappdeveloper.com/installing-python-on-macos-using-pyenv /
     For Windows, the process is a bit lengthier (haven't tested). Follow this guide: https://github.com/pyenv-win/pyenv-win 
 2. After installing pyenv, run:
 ```
