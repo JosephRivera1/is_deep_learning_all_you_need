@@ -24,8 +24,6 @@ Datasets Available via OpenML:
          competitive-data-science-predict-future-sales/
 4. Now install the following packages (would shift to virtualenv later) using pip:
     ```
-    ```
     pip install numpy torch scikit-learn pandas pytorch_tabnet
-    ```
     ```
 5. From the root folder, run: python3 main.py
