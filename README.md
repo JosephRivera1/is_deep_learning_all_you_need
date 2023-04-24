@@ -25,7 +25,7 @@ Datasets Available via OpenML:
     |---- |---- higgs-boson/\
     |---- |---- competitive-data-science-predict-future-sales/
 
-### Using pyenv and virtualenv (recommended way):
+### Using pyenv and virtualenv (recommended but lengthier way):
 1. Install pyenv. <br />
     On linux debian based systems, install pyenv by following this guide (just install pyenv, don't install specific version of python yet): https://itslinuxfoss.com/install-use-pyenv-ubuntu/ <br /> 
    For Mac, follow this guide just install pyenv, don't install specific version of python yet): https://londonappdeveloper.com/installing-python-on-macos-using-pyenv <br />
