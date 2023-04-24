@@ -18,11 +18,11 @@ Datasets Available via OpenML:
 3. Unzip the downloaded datasets and place the "datasets" folder in the root directory of the project. Make sure the directory structure is as follows:\
     .\
     |---- datasets/\
-    |---- |--forest-cover-type/\
-    |---- |--churn-modelling/\
-    |---- |--eye-movements/\
-    |---- |--higgs-boson/\
-    |---- |--competitive-data-science-predict-future-sales/\
+    |---- |---- forest-cover-type/\
+    |---- |---- churn-modelling/\
+    |---- |---- eye-movements/\
+    |---- |---- higgs-boson/\
+    |---- |---- competitive-data-science-predict-future-sales/
 4. Now install the following packages (would shift to virtualenv later) using pip:
     ```
     python3 -m pip install numpy torch scikit-learn pandas pytorch_tabnet
