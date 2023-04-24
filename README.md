@@ -26,7 +26,9 @@ Datasets Available via OpenML:
     |---- |---- competitive-data-science-predict-future-sales/
 
 ### Using pyenv and virtualenv (recommended way):
-1. On mac and linux based systems, install pyenv by following this guide: https://www.newline.co/courses/create-a-serverless-slackbot-with-aws-lambda-and-python/installing-python-3-and-pyenv-on-macos-windows-and-linux
+1. Install pyenv. On linux debian based systems, install pyenv by following this guide (just install pyenv, don't install specific version of python yet): https://itslinuxfoss.com/install-use-pyenv-ubuntu/\
+   For Mac, follow this guide just install pyenv, don't install specific version of python yet): https://londonappdeveloper.com/installing-python-on-macos-using-pyenv/
+    For Windows, the process is a bit lengthier (haven't tested). Follow this guide: https://github.com/pyenv-win/pyenv-win 
 2. After installing pyenv, run:
 ```
 pyenv install 3.10.6
