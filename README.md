@@ -31,9 +31,9 @@ Datasets Available via OpenML:
    For Mac, follow this guide just install pyenv, don't install specific version of python yet): https://londonappdeveloper.com/installing-python-on-macos-using-pyenv <br />
     For Windows, the process is a bit lengthier (haven't tested). Follow this guide: https://github.com/pyenv-win/pyenv-win 
 2. After installing pyenv, run:
-```
-pyenv install 3.10.6
-```
+   ```
+   pyenv install 3.10.6
+   ```
 3. After successfully installing python 3.10.6, go to the root folder of the project and run:
    ```
    pyenv local 3.10.6
@@ -65,9 +65,9 @@ pyenv install 3.10.6
    python3 main.py
    ```
 10. After training has finished, you can deactivate the virtualenv by running:
-   ```
-   deactivate
-   ```
+    ```
+    deactivate
+    ```
 
 ### Running without virtual env (not recommended but way easier):
 1. Install dependencies using:
