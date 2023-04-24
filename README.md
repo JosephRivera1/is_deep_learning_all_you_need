@@ -35,46 +35,46 @@ Datasets Available via OpenML:
 pyenv install 3.10.6
 ```
 3. After successfully installing python 3.10.6, go to the root folder of the project and run:
-```
-pyenv local 3.10.6
-```
+   ```
+   pyenv local 3.10.6
+   ```
 4. Now install virtualenv by running:
-```
-python3 -m pip install virtualenv
-```
+   ```
+   python3 -m pip install virtualenv
+   ```
 5. After installation, run:
-```
-python3 -m venv cap5610_project
-```
+   ```
+   python3 -m venv cap5610_project
+   ```
 6. This creates a new directory cap5610_project/ in the root folder.
 7. Activate the virtualenv by doing the following if you are on a mac or a linux based system:
-```
-source cap5610_project/bin/activate
-```
-If on a windows based system, run:
-```
-env/Scripts/activate.bat //In CMD
-env/Scripts/Activate.ps1 //In Powershel
-```
+   ```
+   source cap5610_project/bin/activate
+   ```
+   If on a windows based system, run:
+   ```
+   env/Scripts/activate.bat //In CMD
+   env/Scripts/Activate.ps1 //In Powershel
+   ```
 8. Now run:
-```
-python3 -m pip install -r requirements.txt
-```
+   ```
+   python3 -m pip install -r requirements.txt
+   ```
 9. After requirements are installed, run:
-```
-python3 main.py
-```
+   ```
+   python3 main.py
+   ```
 10. After training has finished, you can deactivate the virtualenv by running:
-```
-deactivate
-```
+   ```
+   deactivate
+   ```
 
 ### Running without virtual env (not recommended but way easier):
 1. Install dependencies using:
-```
-python3 -m pip install numpy torch scikit-learn pandas pytorch_tabnet
-```
+   ```
+   python3 -m pip install numpy torch scikit-learn pandas pytorch_tabnet
+   ```
 2. Run the training script:
-```
-python3 main.py
-```
+   ```
+   python3 main.py
+   ```
