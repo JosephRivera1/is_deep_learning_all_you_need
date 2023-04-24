@@ -10,3 +10,18 @@ Datasets Available via OpenML:
 3. Forest Cover Type
 4. Rossman Store Sales
 5. Higgs Boson
+
+
+## Instructions to run
+1. First clone the repo, then cd into the root folder of the repo.
+2. Download the datasets from this drive link: https://drive.google.com/drive/folders/1UfxlcT6akOF923KDTH3cVldejXBMM_Nb?usp=share_link
+3. Unzip the downloaded datasets and place the "datasets" folder in the root directory of the project. Make sure the directory structure is as follows:
+    datasets/
+         forest-cover-type/
+         churn-modelling/
+         eye-movements/
+         higgs-boson/
+         competitive-data-science-predict-future-sales/
+4. Now install the following packages (would shift to virtualenv later) using pip:
+    
+5. From the root folder, run: python3 main.py
