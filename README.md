@@ -15,7 +15,7 @@ Datasets Available via OpenML:
 ## Instructions to run
 1. First clone the repo, then cd into the root folder of the repo.
 2. Download the datasets from this drive link: https://drive.google.com/drive/folders/1UfxlcT6akOF923KDTH3cVldejXBMM_Nb?usp=share_link
-3. Unzip the downloaded datasets and place the "datasets" folder in the root directory of the project. Make sure the directory structure is as follows:
+3. Unzip the downloaded datasets and place the "datasets" folder in the root directory of the project. Make sure the directory structure is as follows:\
     datasets/
          forest-cover-type/
          churn-modelling/
