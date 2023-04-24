@@ -13,6 +13,7 @@ Datasets Available via OpenML:
 
 
 ## Instructions to run
+### Download the dataset:
 1. First clone the repo, then cd into the root folder of the repo.
 2. Download the datasets from this drive link: https://drive.google.com/drive/folders/1UfxlcT6akOF923KDTH3cVldejXBMM_Nb?usp=share_link
 3. Unzip the downloaded datasets and place the "datasets" folder in the root directory of the project. Make sure the directory structure is as follows:\
@@ -23,11 +24,54 @@ Datasets Available via OpenML:
     |---- |---- eye-movements/\
     |---- |---- higgs-boson/\
     |---- |---- competitive-data-science-predict-future-sales/
-4. Now install the following packages (would shift to virtualenv later) using pip:
-    ```
-    python3 -m pip install numpy torch scikit-learn pandas pytorch_tabnet
-    ```
-5. From the root folder, run: 
-    ```
-    python3 main.py
-    ```
+
+### Using pyenv and virtualenv (recommended way):
+1. On mac and linux based systems, install pyenv by following this guide: https://www.newline.co/courses/create-a-serverless-slackbot-with-aws-lambda-and-python/installing-python-3-and-pyenv-on-macos-windows-and-linux
+2. After installing pyenv, run:
+```
+pyenv install 3.10.6
+```
+3. After successfully installing python 3.10.6, go to the root folder of the project and run:
+```
+pyenv local 3.10.6
+```
+4. Now install virtualenv by running:
+```
+python3 -m pip install virtualenv
+```
+5. After installation, run:
+```
+python3 -m venv cap5610_project
+```
+6. This creates a new directory cap5610_project/ in the root folder.
+7. Activate the virtualenv by doing the following if you are on a mac or a linux based system:
+```
+source cap5610_project/bin/activate
+```
+If on a windows based system, run:
+```
+env/Scripts/activate.bat //In CMD
+env/Scripts/Activate.ps1 //In Powershel
+```
+8. Now run:
+```
+python3 -m pip install -r requirements.txt
+```
+9. After requirements are installed, run:
+```
+python3 main.py
+```
+10. After training has finished, you can deactivate the virtualenv by running:
+```
+deactivate
+```
+
+### Running without virtual env (not recommended but way easier):
+1. Install dependencies using:
+```
+python3 -m pip install numpy torch scikit-learn pandas pytorch_tabnet
+```
+2. Run the training script:
+```
+python3 main.py
+```
