@@ -5,7 +5,7 @@ import pandas as pd
 
 def load_forest_cover_type_dataset(main_data_dir):
     dataset_path = os.path.join(main_data_dir, 'forest-cover-type')
-    Forest_Cover_df=pd.read_csv(os.path.join(dataset_path, 'covType.csv'))
+    Forest_Cover_df=pd.read_csv(os.path.join(dataset_path, 'covtype.csv'))
     Forest_Cover_df['Cover_Type'] = Forest_Cover_df['Cover_Type'] - 1
     
     X=Forest_Cover_df.drop(columns=['Cover_Type'])
