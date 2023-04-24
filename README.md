@@ -26,4 +26,7 @@ Datasets Available via OpenML:
     ```
     pip install numpy torch scikit-learn pandas pytorch_tabnet
     ```
-5. From the root folder, run: python3 main.py
+5. From the root folder, run: 
+    ```
+    python3 main.py
+    ```
