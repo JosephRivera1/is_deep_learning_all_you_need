@@ -216,21 +216,29 @@ class TabNetMultiCfCustom:
         model = self.load_model()
         if not model:
             return None
-        
-        return np.array(model.predict(X_test))
+
+        preds = model.predict(X_test)
+        if len(preds) == 1:
+            preds = preds[0]
+
+        return np.array(preds)
     
     def predict_proba(self, X_test):
         model = self.load_model()
         if not model:
             return None
         
-        return np.array(model.predict_proba(X_test))
+        probs = model.predict_proba(X_test)
+        if len(probs) == 1:
+            probs = probs[0]
+
+        return np.array(probs)
     
     def train(self, X_train, Y_train, X_val, Y_val):
         
         model = self.load_model()
         if model is not None:
-            return nn.functional.cross_entropy(torch.tensor(np.array(model.predict_proba(X_val))), torch.tensor(Y_val))
+            return nn.functional.cross_entropy(torch.tensor(np.array(model.predict_proba(X_val)[0])), torch.tensor(Y_val).flatten())
 
         tb_clf = TabNetMultiTaskClassifier(
             seed=42,

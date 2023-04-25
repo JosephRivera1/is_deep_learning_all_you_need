@@ -38,7 +38,7 @@ def run_tab_net_for_future_sales():
     predsXGB = xg_reg.predict(X_test)
     print('RMSE test XGBoost: %f' % (np.sqrt(mean_squared_error(Y_test, predsXGB))))
 
-    averaged_preds = (0.5 * predsXGB) + (0.5 * predsTabnet)
+    averaged_preds = (0.5 * predsXGB) + (0.5 * predsTabnet.flatten())
     print('RMSE test averaged preds: %f' % (np.sqrt(mean_squared_error(Y_test, averaged_preds))))
 
 def run_tab_net_for_higgs_boson():
@@ -89,10 +89,9 @@ def run_tab_net_for_forest_cover_type():
     xg_cf = xgb.XGBClassifier()
     xg_cf.fit(X_train,y_train, eval_set=eval_set, eval_metric='mlogloss', verbose=True)
     
-    predsTabnet = tbCf.predict(X_test)
-    logLossTabnet = nn.functional.cross_entropy(torch.tensor(tbCf.predict_proba(X_test)), torch.tensor(Y_test))
+    logLossTabnet = nn.functional.cross_entropy(torch.tensor(tbCf.predict_proba(X_test)), torch.tensor(Y_test.flatten()))
     print("Test cross-entropy using Tabnet: %f" % (logLossTabnet))
-    print("Test-accuracy using Tabnet: %f" % (accuracy_score(Y_test, predsTabnet)))
+    print("Test-accuracy using Tabnet: %f" % (accuracy_score(Y_test.flatten(), tbCf.predict_proba(X_test).argmax(axis=1))))
 
     predsXGB = xg_cf.predict(X_test)
     logLossXGB = nn.functional.cross_entropy(torch.tensor(xg_cf.predict_proba(X_test)), torch.tensor(Y_test.flatten()))
@@ -101,9 +100,9 @@ def run_tab_net_for_forest_cover_type():
 
     averaged_probs = (0.5 * xg_cf.predict_proba(X_test)) + (0.5 * tbCf.predict_proba(X_test))
     averaged_preds = np.argmax(averaged_probs, axis=1)
-    logLossAvg = nn.functional.cross_entropy(torch.tensor(averaged_probs), torch.tensor(Y_test))
+    logLossAvg = nn.functional.cross_entropy(torch.tensor(averaged_probs), torch.tensor(Y_test.flatten()))
     print("Test cross-entropy using averaeed models: %f" % (logLossAvg))
-    print("Test-accuracy using averaged models: %f" % (accuracy_score(Y_test, averaged_preds)))
+    print("Test-accuracy using averaged models: %f" % (accuracy_score(Y_test.flatten(), averaged_preds)))
 
 def run_tab_net_for_eye_movements():
     X, Y, X_test, Y_test = load_eye_movements_dataset(os.path.join(os.curdir, 'datasets'))
@@ -120,10 +119,9 @@ def run_tab_net_for_eye_movements():
     xg_cf = xgb.XGBClassifier()
     xg_cf.fit(X_train,y_train, eval_set=eval_set, eval_metric='mlogloss', verbose=True)
     
-    predsTabnet = tbCf.predict(X_test)
-    logLossTabnet = nn.functional.cross_entropy(torch.tensor(tbCf.predict_proba(X_test)), torch.tensor(Y_test))
+    logLossTabnet = nn.functional.cross_entropy(torch.tensor(tbCf.predict_proba(X_test)), torch.tensor(Y_test.flatten()))
     print("Test cross-entropy using Tabnet: %f" % (logLossTabnet))
-    print("Test-accuracy using Tabnet: %f" % (accuracy_score(Y_test, predsTabnet)))
+    print("Test-accuracy using Tabnet: %f" % (accuracy_score(Y_test.flatten(), tbCf.predict_proba(X_test).argmax(axis=1))))
 
     predsXGB = xg_cf.predict(X_test)
     logLossXGB = nn.functional.cross_entropy(torch.tensor(xg_cf.predict_proba(X_test)), torch.tensor(Y_test.flatten()))
@@ -132,9 +130,9 @@ def run_tab_net_for_eye_movements():
 
     averaged_probs = (0.5 * xg_cf.predict_proba(X_test)) + (0.5 * tbCf.predict_proba(X_test))
     averaged_preds = np.argmax(averaged_probs, axis=1)
-    logLossAvg = nn.functional.cross_entropy(torch.tensor(averaged_probs), torch.tensor(Y_test))
+    logLossAvg = nn.functional.cross_entropy(torch.tensor(averaged_probs), torch.tensor(Y_test.flatten()))
     print("Test cross-entropy using averaeed models: %f" % (logLossAvg))
-    print("Test-accuracy using averaged models: %f" % (accuracy_score(Y_test, averaged_preds)))
+    print("Test-accuracy using averaged models: %f" % (accuracy_score(Y_test.flatten(), averaged_preds)))
 
 def run_tab_net_for_churn_modelling():
     X, Y, X_test, Y_test = load_churn_modelling_dataset(os.path.join(os.curdir, 'datasets'))
@@ -176,10 +174,10 @@ if __name__ == '__main__':
     run_tab_net_for_higgs_boson()
     print()
 
-    run_tab_net_for_forest_cover_type()
-    print()
+    # run_tab_net_for_forest_cover_type()
+    # print()
 
-    run_tab_net_for_eye_movements()
-    print()
+    # run_tab_net_for_eye_movements()
+    # print()
 
-    run_tab_net_for_churn_modelling()
+    # run_tab_net_for_churn_modelling()
