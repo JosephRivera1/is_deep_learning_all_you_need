@@ -6,6 +6,10 @@ import torch
 import os
 import numpy as np
 
+from sklearn.metrics import mean_squared_error, accuracy_score
+import torch
+import torch.nn as nn
+
 class TabNetRegCustom:
     def __init__(self, model_name, max_epochs=100):
         self.model_name = model_name
@@ -23,7 +27,7 @@ class TabNetRegCustom:
         return path
     
     def load_model(self):
-        if 'models' not in os.listdir('.') and 'tabnet' not in os.listdir('models'):
+        if 'models' not in os.listdir('.') or 'tabnet' not in os.listdir('models'):
             return None
         
         if self.model_name + '.zip' not in os.listdir(os.path.join('models', 'tabnet')):
@@ -55,6 +59,10 @@ class TabNetRegCustom:
         return np.array(model.predict(X_test))
 
     def train(self, X_train, Y_train, X_val, Y_val):
+        model = self.load_model()
+        if model is not None:
+            return np.sqrt(mean_squared_error(Y_val, np.array(model.predict(X_val))))
+
         tb_reg = TabNetRegressor(
             seed=42,
             device_name = 'cuda' if torch.cuda.is_available() else 'cpu',
@@ -69,6 +77,7 @@ class TabNetRegCustom:
             scheduler_fn=torch.optim.lr_scheduler.ReduceLROnPlateau,
             verbose=10,
         )
+
         tb_reg.fit(X_train,Y_train,
             eval_set=[(X_train, Y_train), (X_val, Y_val)],
             eval_name=['train', 'valid'],
@@ -100,7 +109,7 @@ class TabNetCfCustom:
         return path
     
     def load_model(self):
-        if 'models' not in os.listdir('.') and 'tabnet' not in os.listdir('models'):
+        if 'models' not in os.listdir('.') or 'tabnet' not in os.listdir('models'):
             return None
         
         if self.model_name + '.zip' not in os.listdir(os.path.join('models', 'tabnet')):
@@ -136,7 +145,10 @@ class TabNetCfCustom:
         return np.array(model.predict_proba(X_test))
 
     def train(self, X_train, Y_train, X_val, Y_val):
-        
+        model = self.load_model()
+        if model is not None:
+            return nn.functional.cross_entropy(torch.tensor(np.array(model.predict_proba(X_val))), torch.tensor(Y_val))
+
         tb_clf = TabNetClassifier(
             seed=42,
             device_name = 'cuda' if torch.cuda.is_available() else 'cpu',
@@ -148,7 +160,7 @@ class TabNetCfCustom:
             scheduler_fn=torch.optim.lr_scheduler.StepLR,
             verbose=10,
         )
-        
+
         tb_clf.fit(X_train,Y_train,
             eval_set=[(X_train, Y_train), (X_val, Y_val)],
             eval_name=['train', 'valid'],
@@ -179,7 +191,7 @@ class TabNetMultiCfCustom:
         return path
     
     def load_model(self):
-        if 'models' not in os.listdir('.') and 'tabnet' not in os.listdir('models'):
+        if 'models' not in os.listdir('.') or 'tabnet' not in os.listdir('models'):
             return None
         
         if self.model_name + '.zip' not in os.listdir(os.path.join('models', 'tabnet')):
@@ -216,6 +228,10 @@ class TabNetMultiCfCustom:
     
     def train(self, X_train, Y_train, X_val, Y_val):
         
+        model = self.load_model()
+        if model is not None:
+            return nn.functional.cross_entropy(torch.tensor(np.array(model.predict_proba(X_val))), torch.tensor(Y_val))
+
         tb_clf = TabNetMultiTaskClassifier(
             seed=42,
             device_name = 'cuda' if torch.cuda.is_available() else 'cpu',
